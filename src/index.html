@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <script src="./jsTPS/jsTPS.js"></script>
+    <script src="./jsTPS/jsTPS_Transaction.js"></script>
+    <script src="./test/demo/Num.js"></script>
+    <script src="./test/demo/AddToNum_Transaction.js"></script>
+    <script src="./test/demo/AndMask_Transaction.js"></script>
+    <script src="./test/demo/OrMask_Transaction.js"></script>
+    <script src="./unit_tests/jsTPSTests.js"></script>
+    <script>
+        function setToResults(id){
+            let result = "";
+            let tests = new jsTPSTests();
+            switch(id){
+                case 'add':
+                    result = tests.testAdd();
+                    break;
+                case 'and':
+                    result = tests.testAndMask();
+                    break;
+                case 'undo':
+                    result = tests.testUndo();
+                    break;
+                case 'redo':
+                    result = tests.testRedo();
+                    break;
+                case 'clear':
+                    result = tests.testClear();
+                    break;
+            }
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <input type=button onClick="setToResults('add')" value="test Add">
+    <input type=button onClick="setToResults('and')" value="test And">
+    <input type=button onClick="setToResults('undo')" value="test Undo">
+    <input type=button onClick="setToResults('redo')" value="test Redo">
+    <input type=button onClick="setToResults('clear')" value="test Clear">
+    <div id="result"></div>
+</body>
+</html>
