@@ -9,6 +9,37 @@
     <script src="./test/demo/OrMask_Transaction.js"></script>
     <script src="./unit_tests/jsTPSTests.js"></script>
     <script>
+            var tps = new jsTPS();
+            var num = new Num();
+
+        function addTransaction(){
+            var addnum = document.getElementById("addnum").value;
+            tps.addTransaction(new AddToNum_Transaction(num,parseInt(addnum)));
+            console.log(num.getNum());
+            document.getElementById("dynamic").innerHTML +="num is now "+num.getNum()+"<br>";
+        }
+
+        function undo(){
+            tps.undoTransaction();
+            document.getElementById("dynamic").innerHTML +="num is now "+num.getNum()+"<br>";
+        }
+
+        function redo(){
+            tps.doTransaction();
+            document.getElementById("dynamic").innerHTML +="num is now "+num.getNum()+"<br>";
+        }
+
+        function clearAll(){
+            tps.clearAllTransactions();
+            document.getElementById("dynamic").innerHTML +="num is now "+num.getNum()+"<br>";
+        }
+
+        function hardReset(){
+            tps.clearAllTransactions();
+            num.setNum(0);
+            document.getElementById("dynamic").innerHTML +="num is now "+num.getNum()+"<br>";
+        }
+
         function setToResults(id){
             let result = "";
             let tests = new jsTPSTests();
@@ -34,6 +65,13 @@
     </script>
 </head>
 <body>
+    <input type="number" id="addnum">
+    <input type="button" onClick="addTransaction()" value="1">
+    <input type="button" onClick="undo()" value="2">
+    <input type="button" onClick="redo()" value="3">
+    <input type="button" onClick="clearAll()" value="4">
+    <input type="button" onClick="hardReset()" value="5">
+    <div id="dynamic"></div>
     <input type=button onClick="setToResults('add')" value="test Add">
     <input type=button onClick="setToResults('and')" value="test And">
     <input type=button onClick="setToResults('undo')" value="test Undo">
